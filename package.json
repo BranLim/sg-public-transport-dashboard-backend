@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean-build": "rm -rf dist && npm run build",
     "build": "prettier --write src/ && npx tsc",
-    "dev": "concurrently -k \"prettier --write src/ && npx tsc --watch\" \"nodemon -q dist/server.js\""
+    "dev": "concurrently -k \"prettier --write src/ && npx tsc --watch\" \"nodemon -r dotenv/config -q dist/server.js\""
   },
   "keywords": [],
   "author": "",
