@@ -7,7 +7,12 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./mongodb_volume:/data/db
+      - mongodb_volume:/data/db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_DB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_DB_PASSWORD}
+
+volumes:
+  mongodb_volume:
+    name: mongodb-volume
+    external: false
