@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 
 const axiosConfiguration: AxiosRequestConfig = {
     headers: {
@@ -10,14 +10,9 @@ const axiosConfiguration: AxiosRequestConfig = {
 
 const authAxios = axios.create(axiosConfiguration);
 
-const getBusArrivals = async (req: Request, res: Response, next: NextFunction) => {
+export const getBusArrivals = async (req: Request, res: Response) => {
     const response = await authAxios.get(
         `BusArrivalv2?BusStopCode=${req.query.busStopCode}`
     );
-    return res.status(200).json(
-        response.data
-    );
+    return res.status(200).json(response.data);
 };
-
-
-export default { getBusArrivals };

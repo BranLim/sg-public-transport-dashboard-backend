@@ -1,8 +1,8 @@
 import express from 'express';
-import controller from '../controllers/buses';
+import { getBusArrivals } from '../controllers';
 
 const router = express.Router();
 
-router.get("/bus-arrivals", controller.getBusArrivals);
+router.get('/bus-arrivals', getBusArrivals);
 
-export = router;
+export { router as busRoute };
