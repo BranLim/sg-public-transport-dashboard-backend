@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { Request, Response } from 'express';
 import { BusArrival, BusArrivals } from '../types/busarrivals';
+import { LtaBusService } from '../../infrastructure/types/LtaBusArrival';
 
 const axiosConfiguration: AxiosRequestConfig = {
     headers: {
@@ -16,15 +17,16 @@ export const getBusArrivals = async (req: Request, res: Response) => {
         `BusArrivalv2?BusStopCode=${req.params.busStopNumber}`
     );
 
-    const busServices = response.data?.Services;
+    const busServices: LtaBusService[] = response.data
+        ?.Services as LtaBusService[];
     if (!busServices) {
         return res.status(500);
     }
 
     const busArrivals: BusArrivals = {
-        services: busServices.map((s: unknown) => {
+        services: busServices.map((busService: LtaBusService) => {
             return {
-                busNo: s.ServiceNo,
+                busNo: busService.ServiceNo,
                 estimatedArrivalTimes: [],
             } as BusArrival;
         }),
